@@ -1,29 +1,21 @@
 $(document).ready(function() {
-    // Menangkap event klik pada tombol simpan
     $('#btnSubmit').on('click', function() {
+        // 1. Ambil semua nilai input sekaligus
+        let nama = $('#inputNama').val();
+        let email = $('#inputEmail').val();
+        let nim = $('#inputNim').val();
 
-        // Mengambil nilai (value) dari masing-masing input menggunakan jQuery
-        let newName = $('#inputNama').val();
-        let newEmail = $('#inputEmail').val();
-        let newNim = $('#inputNim').val();
+        // 2. Validasi singkat: jika ada salah satu yang kosong, stop!
+        if (!nama || !email || !nim) return alert("Harap isi semua data!");
 
-        // Validasi sederhana agar tidak memasukkan data kosong
-        if (newName === "" || newEmail === "" || newNim === "") {
-            alert("Harap isi semua data terlebih dahulu!");
-            return;
-        }
+        // 3. Langsung buat elemen dan masukkan (append) ke #result dalam satu baris!
+        $('#result').append(
+            $('<p>').text(nama).addClass('nama'),
+            $('<p>').text(email).addClass('email'),
+            $('<p>').text(nim).addClass('nim')
+        );
 
-        // Membuat elemen paragraph baru sekalian memberikan class dan teks menggunakan jQuery
-        let pNama = $('<p></p>').text(newName).addClass('nama');
-        let pEmail = $('<p></p>').text(newEmail).addClass('email');
-        let pNim = $('<p></p>').text(newNim).addClass('nim');
-        
-        // Memasukkan (append) elemen baru ke dalam div #result
-        $('#result').append(pNama, pEmail, pNim);
-
-        // Opsional: Mengosongkan form kembali setelah disimpan
-        $('#inputNama').val('');
-        $('#inputEmail').val('');
-        $('#inputNim').val('');
+        // 4. Bersihkan semua input sekaligus menggunakan selektor grup
+        $('#inputNama, #inputEmail, #inputNim').val('');
     });
 });
